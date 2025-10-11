@@ -1,16 +1,27 @@
 const express = require('express');
+const swaggerUI = require('swagger-ui-express');
+const swaggerDocumentation = require('./swagger.json');
+const productRoutes = require('./routes/productRoutes');
+
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Middleware para parsear JSON
+// Middlewares
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// Ruta de prueba
+// Swagger Docs
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocumentation));
+
+// Ruta principal
 app.get('/', (req, res) => {
-  res.send('Servidor listo y funcionando correctamente');
+    res.status(200).json({ message: 'API funcionando correctamente' });
 });
 
-// Iniciar servidor
+// Rutas de productos
+app.use('/api', productRoutes);
+
+// Puerto
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
