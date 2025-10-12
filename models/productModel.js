@@ -34,8 +34,8 @@ class productModel {
    */
   async getProductById(id) {
     try {
-      const result = await db.query('CALL pa_SelectProductoById(?)', [id]);
-      return result[0][0] || null;
+      const result = await db.query('SELECT * FROM vw_ProductosDetalle WHERE IdProducto = ?', [id]);
+      return result[0] || null;
     } catch (error) {
       console.error('DB Error - getProductById:', error);
       throw error;
