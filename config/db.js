@@ -13,21 +13,22 @@ const TRANSIENT = new Set([
 
 class DbService {
     constructor() {
-        this._pool = mysql.createPool({
-            host: process.env.DB_HOST,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME,
-            port: Number(process.env.DB_PORT) || 3306,
-            connectionLimit: Number(process.env.DB_POOL_LIMIT) || 10,
-            waitForConnections: true,
-            connectTimeout: 20000,
-            acquireTimeout: 20000,
-            enableKeepAlive: true,
-            keepAliveInitialDelay: 0,
-            maxIdle: 2,
-            idleTimeout: 60000,
-        }).promise();
+        
+this._pool = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: Number(process.env.DB_PORT) || 3306,
+    connectionLimit: Number(process.env.DB_POOL_LIMIT) || 10,
+    waitForConnections: true,
+    connectTimeout: 20000, // OK
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 0,
+    maxIdle: 2,
+    idleTimeout: 60000
+}).promise();
+
 
         this._keepAliveTimer = setInterval(async () => {
             try {
