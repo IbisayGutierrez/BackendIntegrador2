@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/IbisayGutierrez/BackendIntegrador2#readme",
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "nodemon": "^3.1.10",
     "swagger-autogen": "^2.23.7"
   },
