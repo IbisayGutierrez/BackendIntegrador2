@@ -146,22 +146,4 @@ router.delete('/products/:id', productController.deleteProduct);
  */
 router.post('/products/comprar', productController.comprarProductoCliente);
 
-// Obtener todos los productos
-router.get('/products', productController.getAllProducts);
-
-// Obtener producto por ID
-router.get('/products/:id', productController.getProductById);
-
-// Insertar producto
-router.post('/products', productController.insertProduct);
-
-// Actualizar producto
-router.put('/products/:id', productController.updateProduct);
-
-// Eliminar producto
-router.delete('/products/:id', productController.deleteProduct);
-
-// Comprar producto por cliente
-router.post('/products/comprar', productController.comprarProductoCliente);
-
 module.exports = router;
