@@ -19,4 +19,5 @@ app.get('/', (req, res) => {
 app.use('/api', productRoutes);
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
+app.listen(PORT, () => 
+console.log(`Servidor corriendo en http://localhost:${PORT}`));
