@@ -9,6 +9,10 @@
     {
       "url": "https://backendintegrador2-production.up.railway.app",
       "description": "Servidor de producción"
+    },
+    {
+      "url": "http://localhost:8080",
+      "description": "Desarrollo (local)"
     }
   ],
   "paths": {
