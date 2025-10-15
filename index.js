@@ -1,6 +1,8 @@
 const express = require('express');
 const { swaggerUi, swaggerSpec } = require('./swagger');
 const productRoutes = require('./routes/productRoutes');
+const branchRoutes = require('./routes/branchRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
 
 const app = express();
 
@@ -17,6 +19,8 @@ app.get('/', (req, res) => {
 
 // Rutas
 app.use('/api', productRoutes);
+app.use('/api', branchRoutes);
+app.use('/api', categoryRoutes);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => 

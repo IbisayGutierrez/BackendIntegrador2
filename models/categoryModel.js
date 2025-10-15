@@ -5,7 +5,7 @@ const db = DbService.getDbServiceInstance();
 class productModel {
   async getAllCategory() {
     try {
-      return await db.query('SELECT * FROM CategoriaProducto WHERE Activo = 1');
+      return await db.query('SELECT * FROM CategoriaProducto');
     } catch (error) {
       console.error('DB Error - getAllCategory:', error);
       throw error;
