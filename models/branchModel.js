@@ -13,5 +13,18 @@ class BranchModel {
     }
   }
 
+  /**
+   * @param {number} id
+   */
+  async getBranchById(id) {
+    try {
+      const result = await db.query('SELECT * FROM vw_Sucursales WHERE IdSucursal = ?', [id]);
+      return result[0] || null;
+    } catch (error) {
+      console.error('DB Error - getBranchById:', error);
+      throw error;
+    }
+  }
+
 };
 module.exports = new BranchModel();
