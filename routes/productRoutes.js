@@ -6,11 +6,26 @@ const productController = require('../controllers/productController');
  * @swagger
  * /api/products:
  *   get:
- *     tags: [Productos]
  *     summary: Obtener lista de productos
+ *     description: Devuelve todos los productos activos en el sistema.
+ *     tags: [Productos]
  *     responses:
  *       200:
- *         description: Lista de productos
+ *         description: Lista de productos obtenida correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *       500:
+ *         description: Error al obtener los productos
  */
 router.get('/products', productController.getAllProducts);
 
@@ -18,8 +33,9 @@ router.get('/products', productController.getAllProducts);
  * @swagger
  * /api/products/{id}:
  *   get:
- *     tags: [Productos]
  *     summary: Obtener producto por ID
+ *     description: Devuelve los detalles de un producto específico.
+ *     tags: [Productos]
  *     parameters:
  *       - in: path
  *         name: id
@@ -29,9 +45,21 @@ router.get('/products', productController.getAllProducts);
  *         description: ID del producto
  *     responses:
  *       200:
- *         description: Detalle del producto
+ *         description: Producto obtenido correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
  *       404:
  *         description: Producto no encontrado
+ *       500:
+ *         description: Error al obtener el producto
  */
 router.get('/products/:id', productController.getProductById);
 
@@ -39,28 +67,19 @@ router.get('/products/:id', productController.getProductById);
  * @swagger
  * /api/products:
  *   post:
- *     tags: [Productos]
  *     summary: Insertar un nuevo producto
+ *     description: Agrega un nuevo producto al sistema.
+ *     tags: [Productos]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - nombre
- *               - descripcion
- *               - URLImagen
- *               - precioUnitario
- *               - idCategoria
- *               - idSucursal
- *               - activo
  *             properties:
  *               nombre:
  *                 type: string
  *               descripcion:
- *                 type: string
- *               URLImagen:
  *                 type: string
  *               precioUnitario:
  *                 type: number
@@ -72,17 +91,11 @@ router.get('/products/:id', productController.getProductById);
  *                 type: integer
  *     responses:
  *       201:
- *         description: Producto creado exitosamente
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 data:
- *                   type: object
+ *         description: Producto creado correctamente
+ *       400:
+ *         description: Datos inválidos
+ *       500:
+ *         description: Error al crear el producto
  */
 router.post('/products', productController.insertProduct);
 
@@ -90,8 +103,9 @@ router.post('/products', productController.insertProduct);
  * @swagger
  * /api/products/{id}:
  *   put:
- *     tags: [Productos]
  *     summary: Actualizar un producto
+ *     description: Actualiza los detalles de un producto existente.
+ *     tags: [Productos]
  *     parameters:
  *       - in: path
  *         name: id
@@ -110,8 +124,6 @@ router.post('/products', productController.insertProduct);
  *                 type: string
  *               descripcion:
  *                 type: string
- *               URLImagen:
- *                 type: string
  *               precioUnitario:
  *                 type: number
  *               idCategoria:
@@ -122,32 +134,11 @@ router.post('/products', productController.insertProduct);
  *                 type: integer
  *     responses:
  *       200:
- *         description: Producto actualizado exitosamente
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 data:
- *                   type: object
- *       400:
- *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: false
- *                 message:
- *                   type: string
- *                   example: "Missing or invalid fields"
+ *         description: Producto actualizado correctamente
  *       404:
  *         description: Producto no encontrado
+ *       500:
+ *         description: Error al actualizar el producto
  */
 router.put('/products/:id', productController.updateProduct);
 
@@ -155,8 +146,9 @@ router.put('/products/:id', productController.updateProduct);
  * @swagger
  * /api/products/{id}:
  *   delete:
- *     tags: [Productos]
  *     summary: Eliminar un producto
+ *     description: Elimina un producto del sistema.
+ *     tags: [Productos]
  *     parameters:
  *       - in: path
  *         name: id
@@ -166,9 +158,11 @@ router.put('/products/:id', productController.updateProduct);
  *         description: ID del producto
  *     responses:
  *       200:
- *         description: Producto eliminado
+ *         description: Producto eliminado correctamente
  *       404:
  *         description: Producto no encontrado
+ *       500:
+ *         description: Error al eliminar el producto
  */
 router.delete('/products/:id', productController.deleteProduct);
 
@@ -176,8 +170,9 @@ router.delete('/products/:id', productController.deleteProduct);
  * @swagger
  * /api/products/comprar:
  *   post:
- *     tags: [Productos]
  *     summary: Comprar producto por cliente
+ *     description: Permite a un cliente realizar la compra de un producto.
+ *     tags: [Productos]
  *     requestBody:
  *       required: true
  *       content:
@@ -193,7 +188,11 @@ router.delete('/products/:id', productController.deleteProduct);
  *                 type: integer
  *     responses:
  *       200:
- *         description: Compra realizada
+ *         description: Compra realizada correctamente
+ *       400:
+ *         description: Datos inválidos
+ *       500:
+ *         description: Error al realizar la compra
  */
 router.post('/products/comprar', productController.comprarProductoCliente);
 

@@ -45,11 +45,11 @@ const getProductById = async (req, res) => {
  */
 const insertProduct = async (req, res) => {
   try {
-    const { nombre, descripcion, URLImagen, precioUnitario, idCategoria, idSucursal, activo } = req.body;
-    if (!nombre || !descripcion || !URLImagen || precioUnitario == null || !idCategoria || !idSucursal || activo == null) {
+    const { nombre, descripcion, precioUnitario, idCategoria, idSucursal, activo } = req.body;
+    if (!nombre || !descripcion || precioUnitario == null || !idCategoria || !idSucursal || activo == null) {
       return res.status(400).json({ success: false, message: "Missing required fields" });
     }
-    const producto = { nombre, descripcion, URLImagen, precioUnitario, idCategoria, idSucursal, activo };
+    const producto = { nombre, descripcion, precioUnitario, idCategoria, idSucursal, activo };
     const result = await ProductService.insertProduct(producto);
     return res.status(201).json({ success: true, data: result });
   } catch (error) {
@@ -65,11 +65,11 @@ const insertProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const id = Number(req.params.id);
-    const { nombre, descripcion, URLImagen, precioUnitario, idCategoria, idSucursal, activo } = req.body;
-    if (isNaN(id) || !nombre || !descripcion || !URLImagen || precioUnitario == null || !idCategoria || !idSucursal || activo == null) {
+    const { nombre, descripcion, precioUnitario, idCategoria, idSucursal, activo } = req.body;
+    if (isNaN(id) || !nombre || !descripcion || precioUnitario == null || !idCategoria || !idSucursal || activo == null) {
       return res.status(400).json({ success: false, message: "Missing or invalid fields" });
     }
-    const producto = { nombre, descripcion, URLImagen, precioUnitario, idCategoria, idSucursal, activo };
+    const producto = { nombre, descripcion, precioUnitario, idCategoria, idSucursal, activo };
     const result = await ProductService.updateProduct(id, producto);
     return res.status(200).json({ success: true, data: result });
   } catch (error) {
