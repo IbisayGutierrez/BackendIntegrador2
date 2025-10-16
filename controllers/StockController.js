@@ -1,4 +1,9 @@
+//@ts-check
 const stockService = require('../services/stockService');
+/**
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ */
 
 const getMinStock = async (req, res) => {
   try {
