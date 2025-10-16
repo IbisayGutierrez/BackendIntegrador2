@@ -21,6 +21,11 @@ const getMinStock = async (req, res) => {
     });
   }
 };
+/**
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ */
+
 const getAllStock = async (req, res) => {
   try {
     const stock = await stockService.getAllStock();
