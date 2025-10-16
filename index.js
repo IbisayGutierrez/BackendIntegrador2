@@ -4,7 +4,7 @@ const productRoutes = require('./routes/productRoutes');
 const branchRoutes = require('./routes/branchRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const userRoutes = require('./routes/userRoutes');
-const stockRoutes = require('./routes/stockRoutes');
+
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.use('/api', productRoutes);
 app.use('/api', branchRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', userRoutes);
-app.use('/api', stockRoutes);
+
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => 
