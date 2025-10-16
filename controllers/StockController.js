@@ -43,7 +43,7 @@ const getAllStock = async (req, res) => {
   }
 };
 
-module.exports = { 
-    getMinStock,
-    getAllStock
+module.exports = {
+  getMinStock,
+  getAllStock,
 };

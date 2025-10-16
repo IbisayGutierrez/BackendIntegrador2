@@ -29,8 +29,6 @@ const stockController = require('../controllers/stockController');
  *         description: Error al obtener el valor mínimo del stock
  */
 router.get('/stock/minimo', stockController.getMinStock);
-
-
 /**
  * @swagger
  * /api/stock:
