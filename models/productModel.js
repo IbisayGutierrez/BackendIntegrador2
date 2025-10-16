@@ -42,14 +42,14 @@ class productModel {
     }
   }
   /**
-   * @param {{ nombre: string, descripcion: string, precioUnitario: number, idCategoria: number, idSucursal: number, activo: number }} producto
+   * @param {{ nombre: string, descripcion: string, URLImagen: string, precioUnitario: number, idCategoria: number, idSucursal: number, activo: number }} producto
    */
   async insertProduct(producto) {
     try {
-      const { nombre, descripcion, precioUnitario, idCategoria, idSucursal, activo } = producto;
+      const { nombre, descripcion, URLImagen, precioUnitario, idCategoria, idSucursal, activo } = producto;
       const result = await db.query(
-        'CALL pa_InsertProducto(?, ?, ?, ?, ?, ?)',
-        [nombre, descripcion, precioUnitario, idCategoria, idSucursal, activo]
+        'CALL pa_InsertProducto(?, ?, ?, ?, ?, ?, ?)',
+        [nombre, descripcion, URLImagen, precioUnitario, idCategoria, idSucursal, activo]
       );
       return result;
     } catch (error) {
@@ -59,14 +59,14 @@ class productModel {
   }
   /**
    * @param {number} id
-   * @param {{ nombre: string, descripcion: string, precioUnitario: number, idCategoria: number, idSucursal: number, activo: number }} producto
+   * @param {{ nombre: string, descripcion: string, URLImagen: string, precioUnitario: number, idCategoria: number, idSucursal: number, activo: number }} producto
    */
   async updateProduct(id, producto) {
     try {
-      const { nombre, descripcion, precioUnitario, idCategoria, idSucursal, activo } = producto;
+      const { nombre, descripcion, URLImagen, precioUnitario, idCategoria, idSucursal, activo } = producto;
       const result = await db.query(
-        'CALL pa_UpdateProducto(?, ?, ?, ?, ?, ?, ?)',
-        [id, nombre, descripcion, precioUnitario, idCategoria, idSucursal, activo]
+        'CALL pa_UpdateProducto(?, ?, ?, ?, ?, ?, ?, ?)',
+        [id, nombre, descripcion, URLImagen, precioUnitario, idCategoria, idSucursal, activo]
       );
       return result;
     } catch (error) {
