@@ -197,4 +197,26 @@ router.delete('/products/:id', productController.deleteProduct);
  */
 router.post('/products/comprar', productController.comprarProductoCliente);
 
+/**
+ * @swagger
+ * /api/products/{idCategoria}:
+ *   get:
+ *     tags: [Productos]
+ *     summary: Obtener producto por Categoria
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID de la categoria
+ *     responses:
+ *       200:
+ *         description: Detalle del producto
+ *       404:
+ *         description: Producto no encontrado
+ */
+router.get('/products/:idCategoria', productController.getProductByCategory);
+
+
 module.exports = router;
