@@ -6,6 +6,7 @@ const productController = require('../controllers/productController');
  * @swagger
  * /api/products:
  *   get:
+ *     tags: [Productos]
  *     summary: Obtener lista de productos
  *     responses:
  *       200:
@@ -17,6 +18,7 @@ router.get('/products', productController.getAllProducts);
  * @swagger
  * /api/products/{id}:
  *   get:
+ *     tags: [Productos]
  *     summary: Obtener producto por ID
  *     parameters:
  *       - in: path
@@ -37,6 +39,7 @@ router.get('/products/:id', productController.getProductById);
  * @swagger
  * /api/products:
  *   post:
+ *     tags: [Productos]
  *     summary: Insertar un nuevo producto
  *     requestBody:
  *       required: true
@@ -87,6 +90,7 @@ router.post('/products', productController.insertProduct);
  * @swagger
  * /api/products/{id}:
  *   put:
+ *     tags: [Productos]
  *     summary: Actualizar un producto
  *     parameters:
  *       - in: path
@@ -151,6 +155,7 @@ router.put('/products/:id', productController.updateProduct);
  * @swagger
  * /api/products/{id}:
  *   delete:
+ *     tags: [Productos]
  *     summary: Eliminar un producto
  *     parameters:
  *       - in: path
@@ -171,6 +176,7 @@ router.delete('/products/:id', productController.deleteProduct);
  * @swagger
  * /api/products/comprar:
  *   post:
+ *     tags: [Productos]
  *     summary: Comprar producto por cliente
  *     requestBody:
  *       required: true
