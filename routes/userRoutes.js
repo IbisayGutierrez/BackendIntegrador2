@@ -95,4 +95,48 @@ router.post('/users/register', userController.registerUser);
  */
 router.post('/users/login', userController.loginUser);
 
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Obtener todos los usuarios
+ *     description: Devuelve una lista de todos los usuarios registrados en el sistema.
+ *     tags: [Usuarios]
+ *     responses:
+ *       200:
+ *         description: Lista de usuarios obtenida correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Usuarios obtenidos correctamente.
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       Nombre:
+ *                         type: string
+ *                         example: Juan
+ *                       Correo:
+ *                         type: string
+ *                         example: juan@example.com
+ *                       Rol:
+ *                         type: string
+ *                         example: administrador
+ *       500:
+ *         description: Error al obtener los usuarios
+ */
+router.get('/users', userController.getUsers);
+
+
 module.exports = router;

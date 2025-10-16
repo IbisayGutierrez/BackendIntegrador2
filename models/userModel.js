@@ -48,6 +48,16 @@ class UserRegisterModel {
   }
 
 
+  async getUsers() {
+    try {
+      const result = await db.query("SELECT * FROM vw_Usuarios");
+      return result;
+    } catch (error) {
+      console.error('DB Error - getUsers:', error);
+      throw error;
+    }
+  }
+
 
 }
 

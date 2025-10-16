@@ -1,12 +1,8 @@
 const userService = require('../services/userService');
 
-const userController = {
-  /**
-   * Controlador para registrar un nuevo usuario.
-   * @param {import('express').Request} req
-   * @param {import('express').Response} res
-   */
-  async registerUser(req, res) {
+
+
+  const registerUser = async (req, res) => {
   try {
     const { Nombre, Correo, Contraseña } = req.body;
 
@@ -17,6 +13,7 @@ const userController = {
         message: 'Todos los campos son obligatorios.',
       });
     }
+  
 
     // Validar formato del correo electrónico
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -58,9 +55,9 @@ const userController = {
       message: 'Error al registrar el usuario.',
     });
     }
-  },
-  
-  async loginUser(req, res) {
+  };
+
+   const loginUser = async (req, res) => {
     try {
       const { Correo, Contraseña } = req.body;
 
@@ -91,7 +88,30 @@ const userController = {
         message: 'Error al iniciar sesión.',
       });
     }
-  },
-};
+  };
 
-module.exports = userController;
+  const getUsers = async (req, res) => {
+    try {
+      const users = await userService.getUsers();
+      return res.status(200).json({
+        success: true,
+        message: 'Usuarios obtenidos correctamente.',
+        data: users,
+      });
+    } catch (error) {
+      console.error('Controller Error - getUsers:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Error al obtener los usuarios.',
+      });
+    }
+  };
+
+
+
+
+module.exports = {
+  registerUser,
+  loginUser,
+  getUsers
+}  

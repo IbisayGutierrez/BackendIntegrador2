@@ -26,7 +26,17 @@ const userService = {
       console.error('Service Error - loginUser:', error);
       throw error;
     }
-  }
+  },
+ 
+  async getUsers() {
+    try {
+      return await userModel.getUsers();
+    } catch (error) {
+      console.error('Service Error - getUsers:', error);
+      throw error;
+    }
+  },
+
 
 }
 
