@@ -113,6 +113,26 @@ const comprarProductoCliente = async (req, res) => {
     return res.status(500).json({ success: false, message: "Failed to process purchase" });
   }
 };
+/**
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ */
+const getProductByCategory = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    if (isNaN(id)) {
+      return res.status(400).json({ success: false, message: "Invalid category ID" });
+    }
+    const products = await ProductService.getProductByCategory(id);
+    if (!products) {
+      return res.status(404).json({ success: false, message: "Products not found" });
+    }
+    return res.status(200).json({ success: true, data: products });
+  } catch (error) {
+    console.error("Controller Error - getProductByCategory:", error);
+    return res.status(500).json({ success: false, message: "Failed to retrieve products" });
+  }
+};
 module.exports = {
   getAllProducts,
   getProductById,
@@ -120,6 +140,7 @@ module.exports = {
   updateProduct,
   deleteProduct,
   comprarProductoCliente,
+  getProductByCategory,
 };
 
 

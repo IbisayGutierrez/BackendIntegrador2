@@ -87,5 +87,18 @@ class productModel {
     }
   }
 
+    /**
+   * @param {number} id
+   */
+  async getProductByCategory(id) {
+    try {
+      const result = await db.query('SELECT * FROM vw_ProductosDetalle WHERE IdCategoria = ?', [id]);
+      return result[0] || null;
+    } catch (error) {
+      console.error('DB Error - getProductByCategory:', error);
+      throw error;
+    }
+  }
+
 };
 module.exports = new productModel();
