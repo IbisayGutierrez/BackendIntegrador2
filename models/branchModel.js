@@ -5,13 +5,14 @@ const db = DbService.getDbServiceInstance();
 class BranchModel {
   async getAllBranch() {
     try {
-      const [rows] = await db.query('SELECT * FROM Sucursal WHERE Activo = 1');
-      return rows;
+  const [rows] = await db.query('CALL `railway`.`pa_GetAllSucursales`();');
+  return rows; // Retornar todos los registros
     } catch (error) {
       console.error('DB Error - getAllBranch:', error);
       throw error;
     }
   }
+
   /**
    * @param {number} id
    */
@@ -26,4 +27,4 @@ class BranchModel {
   }
 }
 
-module.exports = BranchModel; // exportamos la clase
+module.exports = BranchModel;
