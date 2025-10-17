@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { swaggerUi, swaggerSpec } = require('./swagger');
 const productRoutes = require('./routes/productRoutes');
 const branchRoutes = require('./routes/branchRoutes');
@@ -13,6 +14,9 @@ app.use(express.urlencoded({ extended: false }));
 
 // Swagger Docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// CORS
+app.use(cors());
 
 // Ruta principal
 app.get('/', (req, res) => {
