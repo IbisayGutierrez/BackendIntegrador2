@@ -23,5 +23,9 @@ class ProductService {
   async deleteProduct(id) {
     return await ProductModel.deleteProduct(id);
   }
+
+  async getProductByCategory(id) {
+    return await ProductModel.getProductByCategory(id);
+  }
 }
 module.exports = new ProductService();
