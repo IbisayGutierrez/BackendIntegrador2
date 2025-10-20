@@ -107,11 +107,43 @@ const userService = require('../services/userService');
     }
   };
 
+/**
+ * Controlador para desactivar un usuario.
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ */
+const deactivateUser = async (req, res) => {
+  try {
+    const { IdUsuario } = req.params;
+
+    if (!IdUsuario) {
+      return res.status(400).json({
+        success: false,
+        message: 'El ID del usuario es obligatorio.',
+      });
+    }
+
+    const result = await userService.deactivateUser(IdUsuario);
+    return res.status(200).json({
+      success: true,
+      message: 'Usuario desactivado correctamente.',
+      data: result,
+    });
+  } catch (error) {
+    console.error('Controller Error - deactivateUser:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Error al desactivar el usuario.',
+    });
+  }
+};
+
 
 
 
 module.exports = {
   registerUser,
   loginUser,
-  getUsers
+  getUsers,
+  deactivateUser
 }  

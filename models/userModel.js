@@ -57,7 +57,20 @@ class UserRegisterModel {
       throw error;
     }
   }
-
+/**
+ * Desactiva un usuario en la base de datos.
+ * @param {number} IdUsuario - ID del usuario a desactivar.
+ * @returns {Promise<any>} Resultado de la operación en la base de datos.
+ */
+async deactivateUser(IdUsuario) {
+  try {
+    const result = await db.query("UPDATE railway.Usuario SET Activo = 0 WHERE IdUsuario = ?", [IdUsuario]);
+    return result;
+  } catch (error) {
+    console.error('DB Error - deactivateUser:', error);
+    throw error;
+  }
+}
 
 }
 

@@ -139,4 +139,40 @@ router.post('/users/login', userController.loginUser);
 router.get('/users', userController.getUsers);
 
 
+/**
+ * @swagger
+ * /api/users/{IdUsuario}/deactivate:
+ *   delete:
+ *     summary: Desactivar un usuario
+ *     description: Cambia el estado de un usuario a inactivo.
+ *     tags: [Usuarios]
+ *     parameters:
+ *       - in: path
+ *         name: IdUsuario
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID del usuario a desactivar.
+ *     responses:
+ *       200:
+ *         description: Usuario desactivado correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Usuario desactivado correctamente.
+ *       400:
+ *         description: ID del usuario faltante o inválido
+ *       500:
+ *         description: Error al desactivar el usuario
+ */
+router.delete('/users/:IdUsuario/deactivate', userController.deactivateUser);
+
+
 module.exports = router;

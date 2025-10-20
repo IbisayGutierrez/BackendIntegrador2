@@ -37,6 +37,20 @@ const userService = {
     }
   },
 
+ /**
+ * Servicio para desactivar un usuario.
+ * @param {number} IdUsuario - ID del usuario a desactivar.
+ * @returns {Promise<any>} Resultado de la operación.
+ */
+async deactivateUser(IdUsuario) {
+  try {
+    return await userModel.deactivateUser(IdUsuario);
+  } catch (error) {
+    console.error('Service Error - deactivateUser:', error);
+    throw error;
+  }
+}
+
 
 }
 
