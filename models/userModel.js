@@ -4,7 +4,7 @@ const db = DbService.getDbServiceInstance();
 const jwt = require('jsonwebtoken');
 
 /**
- * @typedef {Object} Usuario
+
  * @property {string} Nombre - Nombre del usuario.
  * @property {string} Correo - Correo electrónico del usuario.
  * @property {string} Contraseña - Contraseña del usuario.
@@ -13,24 +13,35 @@ class UserRegisterModel {
 
 
   /**
-   * Registra un nuevo usuario en la base de datos.
-   * @param {Usuario} Usuario - Objeto que contiene los datos del usuario.
-   * @returns {Promise<any>} Resultado de la operación en la base de datos.
-   */ 
- async registerUser(Usuario) {
-    const { Nombre, Correo, Contraseña } = Usuario;
-    try {
-      return await db.query("CALL pa_InsertUsuario(?, ?, ?, NULL)", [
-        Nombre,
-        Correo,
-        Contraseña,
-        null // No se envía Rol, el procedimiento almacenado asignará 'admin' automáticamente
-      ]);
-    } catch (error) {
-      console.error("Error in registerUser:", error);
-      throw error;
-    }
+ * @typedef {Object} Usuario
+ * @property {string} Nombre - Nombre del usuario.
+ * @property {string} Correo - Correo electrónico del usuario.
+ * @property {string} Contraseña - Contraseña del usuario.
+ * @property {string} [Rol] - (Opcional) Rol del usuario ('admin' o 'usuario').
+ * @property {number} [IdSucursal] - (Opcional) Id de la sucursal asociada.
+ */
+
+/**
+ * Registra un nuevo usuario en la base de datos.
+ * @param {Usuario} Usuario - Objeto que contiene los datos del usuario.
+ * @returns {Promise<any>} Resultado de la operación en la base de datos.
+ */ 
+async registerUser(Usuario) {
+  const { Nombre, Correo, Contraseña, Rol = null, IdSucursal = null } = Usuario;
+  try {
+    // Llamamos al procedimiento con los 5 parámetros: p_Nombre, p_Correo, p_Contraseña, p_Rol, p_IdSucursal
+    return await db.query("CALL pa_InsertUsuario(?, ?, ?, ?, ?)", [
+      Nombre,
+      Correo,
+      Contraseña,
+      Rol,        // si es null el SP asignará 'admin' por defecto
+      IdSucursal  // puede ser null
+    ]);
+  } catch (error) {
+    console.error("Error in registerUser:", error);
+    throw error;
   }
+}
   /**
    * Obtiene un usuario por su correo y contraseña.
    * @param {string} Correo
