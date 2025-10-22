@@ -2,38 +2,33 @@ const userService = require('../services/userService');
 
 
 
-  const registerUser = async (req, res) => {
+ const registerUser = async (req, res) => {
   try {
-    const { Nombre, Correo, Contraseña } = req.body;
+    const { Nombre, Correo, Contraseña, Rol = null, IdSucursal = null } = req.body;
 
-    // Validar que todos los campos estén presentes
-    if (!Nombre || !Correo || !Contraseña) {
+    // Validar que los campos obligatorios estén presentes
+    if (!Nombre || !Correo || !Contraseña || !Rol || !IdSucursal) {
       return res.status(400).json({
         success: false,
-        message: 'Todos los campos son obligatorios.',
+        message: 'Todos los campos obligatorios (Nombre, Correo, Contraseña) deben estar presentes.',
       });
     }
-  
 
-    // Validar formato del correo electrónico
+    // Validar formato del correo
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(Correo)) {
-      return res.status(400).json({
-        success: false,
-        message: 'El formato del correo electrónico es inválido.',
-      });
+      return res.status(400).json({ success: false, message: 'Correo inválido.' });
     }
 
     // Validar longitud de la contraseña
     if (Contraseña.length < 6) {
-      return res.status(400).json({
-        success: false,
-        message: 'La contraseña debe tener al menos 6 caracteres.',
-      });
+      return res.status(400).json({ success: false, message: 'La contraseña debe tener al menos 6 caracteres.' });
     }
 
-    // Registrar el usuario
-    const result = await userService.registerUser({ Nombre, Correo, Contraseña });
+    // Asegurar IdSucursal numérico o null
+    const idSucursalVal = IdSucursal !== undefined && IdSucursal !== null ? Number(IdSucursal) : null;
+
+    const result = await userService.registerUser({ Nombre, Correo, Contraseña, Rol, IdSucursal: idSucursalVal });
     return res.status(201).json({
       success: true,
       message: 'Usuario registrado correctamente.',
@@ -41,21 +36,12 @@ const userService = require('../services/userService');
     });
   } catch (error) {
     console.error('Controller Error - registerUser:', error);
-
-    // Manejar errores específicos de la base de datos
     if (error.code === 'ER_DUP_ENTRY') {
-      return res.status(409).json({
-        success: false,
-        message: 'El correo electrónico ya está registrado.',
-      });
+      return res.status(409).json({ success: false, message: 'El correo ya está registrado.' });
     }
-
-    return res.status(500).json({
-      success: false,
-      message: 'Error al registrar el usuario.',
-    });
-    }
-  };
+    return res.status(500).json({ success: false, message: 'Error al registrar el usuario.' });
+  }
+};
 
    const loginUser = async (req, res) => {
     try {
