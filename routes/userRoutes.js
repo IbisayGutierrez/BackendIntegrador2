@@ -7,7 +7,7 @@ const userController = require('../controllers/userController');
  * /api/users/register:
  *   post:
  *     summary: Registrar un nuevo usuario
- *     description: Registra un nuevo usuario en el sistema.
+ *     description: Registra un nuevo usuario en el sistema. Los campos 'Rol' e 'IdSucursal' son opcionales; si no se envía 'Rol' el procedimiento almacenado asigna 'admin' por defecto.
  *     tags: [Usuarios]
  *     requestBody:
  *       required: true
@@ -25,6 +25,20 @@ const userController = require('../controllers/userController');
  *               Contraseña:
  *                 type: string
  *                 example: password123
+ *               Rol:
+ *                 type: string
+ *                 enum: [admin, usuario]
+ *                 description: Rol del usuario; si se omite será 'admin' por defecto.
+ *                 example: usuario
+ *               IdSucursal:
+ *                 type: integer
+ *                 nullable: true
+ *                 description: Id de la sucursal asociada (opcional).
+ *                 example: 1
+ *             required:
+ *               - Nombre
+ *               - Correo
+ *               - Contraseña
  *     responses:
  *       201:
  *         description: Usuario registrado correctamente
@@ -47,6 +61,7 @@ const userController = require('../controllers/userController');
  *         description: Error al registrar el usuario
  */
 router.post('/users/register', userController.registerUser);
+
 
 /**
  * @swagger
