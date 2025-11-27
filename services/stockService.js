@@ -2,8 +2,8 @@ const stockModel = require('../models/stockModel');
 
 const stockService = {
   /**
-   * Servicio para obtener el valor mínimo del stock.
-   * @returns {Promise<number>} Valor mínimo del stock.
+   * 
+   * @returns {Promise<number>} 
    */
   async getMinStock() {
     try {
@@ -14,8 +14,8 @@ const stockService = {
     }
   },
   /**
-   * Servicio para obtener todos los stocks.
-   * @returns {Promise<Array>} Todos los stocks.
+   *
+   * @returns {Promise<Array>} 
    */
   async getAllStock() {
     try {

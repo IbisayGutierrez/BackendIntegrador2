@@ -22,7 +22,7 @@ this._pool = mysql.createPool({
     port: Number(process.env.DB_PORT) || 3306,
     connectionLimit: Number(process.env.DB_POOL_LIMIT) || 10,
     waitForConnections: true,
-    connectTimeout: 20000, // OK
+    connectTimeout: 20000, 
     enableKeepAlive: true,
     keepAliveInitialDelay: 0,
     maxIdle: 2,

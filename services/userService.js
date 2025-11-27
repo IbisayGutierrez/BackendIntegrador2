@@ -19,7 +19,7 @@ const userService = {
         return null;
       }
 
-      // Generar un token JWT
+      
       const token = jwt.sign({ id: user.id, Correo: user.Correo }, 'secretKey', { expiresIn: '1h' });
       return token;
     } catch (error) {

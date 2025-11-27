@@ -5,17 +5,17 @@ const jwt = require('jsonwebtoken');
 
 /**
  * @typedef {Object} Usuario
- * @property {string} Nombre - Nombre del usuario.
- * @property {string} Correo - Correo electrónico del usuario.
- * @property {string} Contraseña - Contraseña del usuario.
+ * @property {string} Nombre 
+ * @property {string} Correo 
+ * @property {string} Contraseña 
  */
 class UserRegisterModel {
 
 
   /**
-   * Registra un nuevo usuario en la base de datos.
-   * @param {Usuario} Usuario - Objeto que contiene los datos del usuario.
-   * @returns {Promise<any>} Resultado de la operación en la base de datos.
+   * 
+   * @param {Usuario} Usuario 
+   * @returns {Promise<any>} 
    */ 
  async registerUser(Usuario) {
     const { Nombre, Correo, Contraseña } = Usuario;
@@ -24,7 +24,7 @@ class UserRegisterModel {
         Nombre,
         Correo,
         Contraseña,
-        null // No se envía Rol, el procedimiento almacenado asignará 'admin' automáticamente
+        null 
       ]);
     } catch (error) {
       console.error("Error in registerUser:", error);
@@ -32,7 +32,7 @@ class UserRegisterModel {
     }
   }
   /**
-   * Obtiene un usuario por su correo y contraseña.
+   * 
    * @param {string} Correo
    * @param {string} Contraseña
    * @returns {Promise<Object|null>} 

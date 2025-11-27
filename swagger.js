@@ -28,7 +28,7 @@ const options = {
     },
     servers
   },
-  apis: ['./routes/*.js'] // Ajusta según tu estructura
+  apis: ['./routes/*.js'] 
 };
 
 const swaggerSpec = swaggerJsdoc(options);

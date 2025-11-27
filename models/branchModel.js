@@ -6,7 +6,7 @@ class BranchModel {
   async getAllBranch() {
     try {
   const [rows] = await db.query('CALL `railway`.`pa_GetAllSucursales`();');
-  return rows; // Retornar todos los registros
+  return rows; 
     } catch (error) {
       console.error('DB Error - getAllBranch:', error);
       throw error;

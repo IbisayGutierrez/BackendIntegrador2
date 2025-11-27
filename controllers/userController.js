@@ -6,7 +6,7 @@ const userService = require('../services/userService');
   try {
     const { Nombre, Correo, Contraseña } = req.body;
 
-    // Validar que todos los campos estén presentes
+    
     if (!Nombre || !Correo || !Contraseña) {
       return res.status(400).json({
         success: false,
@@ -15,7 +15,7 @@ const userService = require('../services/userService');
     }
   
 
-    // Validar formato del correo electrónico
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(Correo)) {
       return res.status(400).json({
@@ -24,7 +24,7 @@ const userService = require('../services/userService');
       });
     }
 
-    // Validar longitud de la contraseña
+    
     if (Contraseña.length < 6) {
       return res.status(400).json({
         success: false,
@@ -32,7 +32,7 @@ const userService = require('../services/userService');
       });
     }
 
-    // Registrar el usuario
+    
     const result = await userService.registerUser({ Nombre, Correo, Contraseña });
     return res.status(201).json({
       success: true,
@@ -42,7 +42,7 @@ const userService = require('../services/userService');
   } catch (error) {
     console.error('Controller Error - registerUser:', error);
 
-    // Manejar errores específicos de la base de datos
+    
     if (error.code === 'ER_DUP_ENTRY') {
       return res.status(409).json({
         success: false,
